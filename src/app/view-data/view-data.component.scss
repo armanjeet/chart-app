@@ -1,0 +1,15 @@
+.chart-container {
+  width: 50vw; /* 50% of the viewport width */
+  height: auto; /* Adjust height automatically */
+  margin: 0 auto; /* Center horizontally */
+}
+
+mat-card {
+  max-width: 100%; /* Ensure the card doesn't exceed the viewport width */
+  margin: 0 auto; /* Center the card horizontally */
+}
+
+#myChart {
+  width: 100%; /* Make the canvas fill its container */
+  height: 100%; /* Make the canvas fill its container */
+}

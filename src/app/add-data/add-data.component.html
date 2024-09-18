@@ -1,0 +1,44 @@
+<form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+  <!-- #region Date and Time Input -->
+  <mat-form-field appearance="fill" style="margin-left: 5px;">
+    <mat-label>Date and Time</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="datetime" (dateChange)="onDateChange($event)">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="dataForm.get('datetime')?.hasError('dateTooEarly')">
+      Date cannot be before the last entered date.
+    </mat-error>
+    <mat-error *ngIf="dataForm.get('datetime')?.hasError('required')">
+      Date is required.
+    </mat-error>
+  </mat-form-field>
+  <!-- #endregion -->
+
+  <!-- #region Temperature Input -->
+  <mat-form-field appearance="fill" style="margin-left: 5px;">
+    <mat-label>Temperature (°C)</mat-label>
+    <input matInput type="number" formControlName="temperature">
+    <mat-error *ngIf="dataForm.get('temperature')?.hasError('required')">
+      Temperature is required.
+    </mat-error>
+    <mat-error *ngIf="dataForm.get('temperature')?.hasError('min')">
+      Temperature cannot be less than -50°C.
+    </mat-error>
+    <mat-error *ngIf="dataForm.get('temperature')?.hasError('max')">
+      Temperature cannot be more than 50°C.
+    </mat-error>
+  </mat-form-field>
+  <!-- #endregion -->
+
+  <!-- #region Submit Button -->
+  <div style="margin-top: 20px; margin-left: 10px;">
+    <button mat-raised-button color="primary" type="submit">Add Data</button>
+  </div>
+  <!-- #endregion -->
+
+  <!-- #region Display Data -->
+  <ul>
+    <li *ngFor="let item of dataItems">{{ item.datetime }} - {{ item.temperature }}°C</li>
+  </ul>
+  <!-- #endregion -->
+</form>
